@@ -40,10 +40,11 @@ app.get('/transfer', (req, res) => {
 
 app.post('/transfer', (req, res) => {
     const from = req.body.from;
+    const to = req.body.to;
     const amount = req.body.amount;
     const currentBalanceInFrom = accounts[from].balance;
     accounts[from].balance = currentBalanceInFrom - amount;
-    accounts[To].balance += amount;
+    accounts[to].balance += amount;
     var accountsJSON = JSON.stringify(accounts);
     fs.writeFileSync(__dirname + '/json/accounts.json', accountsJSON, { encoding: 'UTF8' });
     res.render('transfer', { message: "Transfer Completed" })
